@@ -7,4 +7,4 @@ pandas==0.25.1
 pickleshare==0.7.5
 joblib==0.13.2
 plotly==4.1.1
-tensorflow==1.15
+tensorflow-cpu==1.15

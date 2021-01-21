@@ -3,8 +3,8 @@
 ##################################################
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+# import matplotlib.pyplot as plt
+# import seaborn as sns
 import re
 import os
 import pickle
@@ -548,15 +548,15 @@ class Simulator:
 				'Average Runs Scored (/9-inning-game):',
 				round((runs_per_inning)*9, 3)
 				)
-			with plt.style.context(['ggplot', 'seaborn-talk']):
-				fig, ax = plt.subplots(figsize=(6,4))
-				sns.distplot(RESULTS['simulation_total'])
-				ax.set(
-					title='Runs Scored Per Game',
-					xlabel='Runs Scored',
-					ylabel='Percent of Simulated Innings'
-					)
-				plt.show()
+			# with plt.style.context(['ggplot', 'seaborn-talk']):
+			# 	fig, ax = plt.subplots(figsize=(6,4))
+			# 	sns.distplot(RESULTS['simulation_total'])
+			# 	ax.set(
+			# 		title='Runs Scored Per Game',
+			# 		xlabel='Runs Scored',
+			# 		ylabel='Percent of Simulated Innings'
+			# 		)
+			# 	plt.show()
 		return RESULTS, verbose_results
 	
 	def optimize_lineup(self,
@@ -1052,44 +1052,44 @@ def plot_stat_impact_on_outcome(df,
 					   'cornflowerblue',
 					   'darkblue']
 
-	# Plot
-	fig, ax = plt.subplots()
-	for outcome, y_tick in zip(possible_outcomes, y_tick_markers):
-		s = data[data[target] == outcome].copy()
-		# Find leftmost placement of bars.
-		leftmost = (s[s[stat_column] == 'mid']['percent'].values[0] / 2) + \
-					s[s[stat_column] == 'mid-low']['percent'].values[0] + \
-					s[s[stat_column] == 'low']['percent'].values[0]
-		leftmost = -leftmost
+	# # Plot
+	# fig, ax = plt.subplots()
+	# for outcome, y_tick in zip(possible_outcomes, y_tick_markers):
+	# 	s = data[data[target] == outcome].copy()
+	# 	# Find leftmost placement of bars.
+	# 	leftmost = (s[s[stat_column] == 'mid']['percent'].values[0] / 2) + \
+	# 				s[s[stat_column] == 'mid-low']['percent'].values[0] + \
+	# 				s[s[stat_column] == 'low']['percent'].values[0]
+	# 	leftmost = -leftmost
 
-		# Iterate and plot.
-		for group, color in zip(labels, gradient_colors):
-			if y_tick == y_tick_markers[0]:
-				if legend_label:
-					label = f'{group.title()} {legend_label}'
-				else:
-					label = group.title()
-			else:
-				label = None
-			v = s[s[stat_column] == group]['percent'].values[0]
-			ax.barh(y_tick, 
-					v, 
-					left=leftmost,
-					color=color,
-					label=label)
-			leftmost += v
-	ax.set_yticks(y_tick_markers)
-	ax.set_yticklabels(possible_outcomes)
-	ax.set(title=f'{stat_column} :: Impact on {target.title()}',
-		   xlabel='Percent of Outcomes',
-		   ylabel='Outcome')
-	ax.legend(loc='upper center', 
-			  bbox_to_anchor=(0.5, -0.15),
-			  fancybox=True, 
-			  shadow=True, 
-			  ncol=5)
-	fig.tight_layout()
-	plt.show()
+	# 	# Iterate and plot.
+	# 	for group, color in zip(labels, gradient_colors):
+	# 		if y_tick == y_tick_markers[0]:
+	# 			if legend_label:
+	# 				label = f'{group.title()} {legend_label}'
+	# 			else:
+	# 				label = group.title()
+	# 		else:
+	# 			label = None
+	# 		v = s[s[stat_column] == group]['percent'].values[0]
+	# 		ax.barh(y_tick, 
+	# 				v, 
+	# 				left=leftmost,
+	# 				color=color,
+	# 				label=label)
+	# 		leftmost += v
+	# ax.set_yticks(y_tick_markers)
+	# ax.set_yticklabels(possible_outcomes)
+	# ax.set(title=f'{stat_column} :: Impact on {target.title()}',
+	# 	   xlabel='Percent of Outcomes',
+	# 	   ylabel='Outcome')
+	# ax.legend(loc='upper center', 
+	# 		  bbox_to_anchor=(0.5, -0.15),
+	# 		  fancybox=True, 
+	# 		  shadow=True, 
+	# 		  ncol=5)
+	# fig.tight_layout()
+	# plt.show()
 
 def print_metrics(X, 
 				  y, 

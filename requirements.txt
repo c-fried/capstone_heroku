@@ -8,3 +8,4 @@ pickleshare==0.7.5
 joblib==0.13.2
 plotly==4.1.1
 tensorflow-cpu==1.15
+gunicorn==19.9.0

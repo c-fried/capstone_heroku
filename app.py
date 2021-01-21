@@ -11,6 +11,7 @@ import json
 import os
 import pickle
 import joblib
+import sklearn
 
 import plotly.graph_objects as go
 import plotly.express as px

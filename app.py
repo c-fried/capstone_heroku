@@ -703,8 +703,13 @@ def optimize_lineup(n_clicks, simulations_per_order, data):
 	Iterate through each lineup-spot to find out who belongs where in the order.
 	"""
 
+	global storage
+
 	if not n_clicks:
 		raise PreventUpdate
+
+	storage.locked_in = []
+	storage.currently_trying = []
 
 	# Load data
 	data = json.loads(data)
@@ -757,10 +762,6 @@ def optimize_lineup(n_clicks, simulations_per_order, data):
 
 	h1, h2, h3, h4, h5, h6, h7, h8, h9 = hitters
 	success_msg = '\n#### Lineup Sorted Sucessfully\n'
-
-	# # reset storage
-	storage.locked_in = []
-	storage.currently_trying = []
 
 	# set lineup inputs to optimized lineup
 	return h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg

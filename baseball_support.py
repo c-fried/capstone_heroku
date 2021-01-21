@@ -404,11 +404,7 @@ class Simulator:
 				o2 = self.player_finder.get_player_name(lineup[atbat_idx])
 				o3 = 'at bat, the play resulted in'
 				o4 = verbose_dct[simulated_outcome]
-				outcome_statement = f'{o1} **{o2}** {o3} **{o4}**.'
-				# outcome_statement = 'With ' + \
-				# 	self.player_finder.get_player_name(lineup[atbat_idx]) + \
-				# 	' at bat, the play resulted in ' + \
-				# 	 f'{verbose_dct[simulated_outcome]}.'
+				outcome_statement = f'{o1} **{o2}** {o3} **{o4:>{20}}**.'
 				results_verbose.append(outcome_statement)
 
 				# update simulation
@@ -427,7 +423,7 @@ class Simulator:
 				# append results
 				if s.get('outs') >= 3:
 					results.append(s.get('runs'))
-		return results, results_verbose
+		return results, '\n'.join(results_verbose)
 
 	def simulate(self, 
 				 lineup, 

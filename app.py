@@ -26,7 +26,7 @@ port = int(os.environ.get('PORT', 5000))
 # SETUP
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1" # prevent CUDA from using GPU
 # MODEL_PATH = './models/trained_model_1_layer_no_weights.h5'
-MODEL_PATH 'trained_model_1_layer_no_weights.h5'
+MODEL_PATH = 'trained_model_1_layer_no_weights.h5'
 model = load_model(MODEL_PATH)
 # SGD_PATH = './models/sgd.pkl'
 # model = joblib.load(SGD_PATH)

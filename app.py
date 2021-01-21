@@ -22,11 +22,11 @@ from baseball_support import (
 	)
 
 # SETUP
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1" # prevent CUDA from using GPU
-MODEL_PATH = 'trained_model_1_layer_no_weights.h5'
-model = load_model(MODEL_PATH)
-# SGD_PATH = './models/sgd.pkl'
-# model = joblib.load(SGD_PATH)
+# os.environ["CUDA_VISIBLE_DEVICES"] = "-1" # prevent CUDA from using GPU
+# MODEL_PATH = 'trained_model_1_layer_no_weights.h5'
+# model = load_model(MODEL_PATH)
+SGD_PATH = 'sgd.pkl'
+model = joblib.load(SGD_PATH)
 
 X_preprocessor, y_preprocessor = load_preprocessors()
 MLB = pickle.load(open('./data/populated_league_sm.pkl', 'rb'))

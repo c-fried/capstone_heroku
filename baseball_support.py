@@ -316,7 +316,7 @@ class Simulator:
 	def __get_predictions_from_df(self, df):
 		"""Returns a list of predictions for the lineup from self.model."""
 
-		return self.model.predict(
+		return self.model.predict_proba(
 			self.X_preprocessor.transform(df)
 		)[0]
 

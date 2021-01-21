@@ -8,7 +8,6 @@ from dash.exceptions import PreventUpdate
 import numpy as np
 import pandas as pd
 import json
-import bz2
 import os
 import pickle
 import joblib
@@ -21,6 +20,8 @@ from tensorflow.keras.models import load_model
 from baseball_support import (
 	Simulator, PlayerFinder, DataStorage, load_preprocessors, shuffle_lst
 	)
+
+port = int(os.environ.get('PORT', 5000))
 
 # SETUP
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1" # prevent CUDA from using GPU

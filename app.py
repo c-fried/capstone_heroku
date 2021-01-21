@@ -469,6 +469,7 @@ CREDITS_DIV = html.Div(id='credits', children=[
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SIMPLEX])
 app.title = 'Neural Networks in MLB'
+server = app.server
 
 app.layout = html.Div(
 	id='main_div', 

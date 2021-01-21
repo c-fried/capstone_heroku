@@ -423,7 +423,7 @@ class Simulator:
 				# append results
 				if s.get('outs') >= 3:
 					results.append(s.get('runs'))
-		return results, '\n'.join(results_verbose)
+		return results, results_verbose
 
 	def simulate(self, 
 				 lineup, 

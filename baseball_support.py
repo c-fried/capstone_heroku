@@ -17,7 +17,7 @@ from scipy.stats import wilcoxon
 from sklearn.metrics import (classification_report, 
                              balanced_accuracy_score, 
                              log_loss)
-import tensorflow as tf
+# import tensorflow as tf
 
 
 class DataStorage:
@@ -1120,12 +1120,12 @@ def print_metrics(X,
 	"""
 
 	# Get predictions.
-	if isinstance(classifier, tf.python.keras.engine.sequential.Sequential):
-		y_pred_proba = classifier.predict(X)
-		y_pred = [np.argmax(x) for x in y_pred_proba]
-	else:
-		y_pred = classifier.predict(X)
-		y_pred_proba = classifier.predict_proba(X)
+	# if isinstance(classifier, tf.python.keras.engine.sequential.Sequential):
+	# 	y_pred_proba = classifier.predict(X)
+	# 	y_pred = [np.argmax(x) for x in y_pred_proba]
+	# else:
+	y_pred = classifier.predict(X)
+	y_pred_proba = classifier.predict_proba(X)
 
 	# Get metrics.
 	clf_report = classification_report(y, y_pred, 

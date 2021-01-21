@@ -16,7 +16,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 from plotly.figure_factory import create_distplot
 
-from tensorflow.keras.models import load_model
+# from tensorflow.keras.models import load_model
 from baseball_support import (
 	Simulator, PlayerFinder, DataStorage, load_preprocessors, shuffle_lst
 	)
@@ -369,8 +369,9 @@ HEADING_DIV = html.Div(id='heading', children=[
 	dbc.Row(
 		dbc.Col(
 			html.P("""
-				This app uses a Neural Network built in Tensorflow and "event"
-				data that I've collected and engineered from Retrosheet.org.
+				This app uses an SGD Logistic Regression model (built in 
+				Sklearn) and "event" data that I've collected and engineered 
+				from Retrosheet.org.
 				My goal was to make a model that could predict the outcome of an
 				"event" (at-bat) during a game. There are 10 outcomes of an 
 				event, such as ['single', 'strikeout', 'home-run', 'walk', etc].

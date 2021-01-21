@@ -33,16 +33,8 @@ X_preprocessor, y_preprocessor = load_preprocessors()
 MLB = pickle.load(open('./data/populated_league_sm.pkl', 'rb'))
 pf = PlayerFinder()
 simulator = Simulator(model, MLB, X_preprocessor, y_preprocessor, pf)
-
 storage = DataStorage()
-print('All loaded.')
 
-# Layout variables.
-# player_options = [
-# 	{'label': f"{d['last']}, {d['first']}: {d['play_debut'].year}", 
-# 	 'value': idx}
-# 	for idx, d in pf.player_df.iterrows()
-#  ]
 with open(r"player_options.json", "r") as read_file:
     player_options = json.load(read_file)
 
@@ -664,6 +656,8 @@ def show_optimize_progress(n_intervals, disabled):
 	The `storage` class is checked (the data from which is updated during the
 	optimizer).
 	"""
+
+	global storage
 
 	if disabled:
 		return '', ''

@@ -2,7 +2,6 @@ dash==1.18.1
 dash-bootstrap-components==0.11.1
 dash-core-components==1.14.1
 dash-html-components==1.1.1
-dash-renderer==1.8.3
 numpy==1.19.3
 pandas==0.25.1
 pickleshare==0.7.5

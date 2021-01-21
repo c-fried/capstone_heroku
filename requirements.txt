@@ -12,4 +12,4 @@ bz2file==0.98
 pickleshare==0.7.5
 joblib==0.13.2
 plotly==4.1.1
-tensorflow==2.1.0
+tensorflow==1.15

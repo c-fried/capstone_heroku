@@ -9,6 +9,5 @@ dash_html_components==1.1.1
 dash_core_components==1.14.1
 matplotlib==3.2.2
 dash_bootstrap_components==0.11.1
-ipython==7.19.0
 numpy==1.19.5
 scikit_learn==0.24.1

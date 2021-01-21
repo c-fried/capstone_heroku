@@ -10,7 +10,7 @@ import os
 import pickle
 import bz2
 import warnings
-from IPython.display import clear_output
+# from IPython.display import clear_output
 
 from scipy import sparse
 from scipy.stats import wilcoxon
@@ -611,7 +611,7 @@ class Simulator:
 			for batting_order in shuffle_lst(hitters, 
 											 start_idx, 
 											 masked_elements=8-len(locked_in)):
-				clear_output(wait=True)
+				# clear_output(wait=True)
 				show_lineup_locks(locked_in)
 				print('Trying:\n', np.array(
 					[f'{n}. {self.player_finder.get_player_name(x, verbose=False)}'
@@ -663,7 +663,7 @@ class Simulator:
 			hitters = locked_in + hitters
 
 		# Display
-		clear_output(wait=True)
+		# clear_output(wait=True)
 		show_lineup_locks(locked_in)
 		return hitters
 

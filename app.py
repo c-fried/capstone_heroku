@@ -38,11 +38,13 @@ storage = DataStorage()
 print('All loaded.')
 
 # Layout variables.
-player_options = [
-	{'label': f"{d['last']}, {d['first']}: {d['play_debut'].year}", 
-	 'value': idx}
-	for idx, d in pf.player_df.iterrows()
- ]
+# player_options = [
+# 	{'label': f"{d['last']}, {d['first']}: {d['play_debut'].year}", 
+# 	 'value': idx}
+# 	for idx, d in pf.player_df.iterrows()
+#  ]
+with open(r"player_options.json", "r") as read_file:
+    player_options = json.load(read_file)
 
 
 def player_dropdown(_id, player_id=''):

@@ -15,7 +15,6 @@ import sklearn
 
 import plotly.graph_objects as go
 import plotly.express as px
-from plotly.figure_factory import create_distplot
 
 # from tensorflow.keras.models import load_model
 from baseball_support import (
@@ -347,7 +346,7 @@ HEADING_DIV = html.Div(id='heading', children=[
 		),
 	dbc.Row(
 		dbc.Col(
-			html.H3('Simulating Gameplay using Neural Networks'),
+			html.H3('Simulating Gameplay using Machine Learning'),
 			width='auto'),
 		justify='center'),
 	dbc.Row(
@@ -460,7 +459,7 @@ CREDITS_DIV = html.Div(id='credits', children=[
 ################################################################################
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SIMPLEX])
-app.title = 'Neural Networks in MLB'
+app.title = 'Machine Learning in MLB'
 server = app.server
 
 app.layout = html.Div(
@@ -616,12 +615,13 @@ def show_results_simulate(n_clicks, n, data):
 		# raise PreventUpdate
 
 	df, verbose_results = simulator.simulate(n=n, **json.loads(data))
-	df['simulation_total'] = df['simulation_total'].astype('category')
-	fig = px.bar(df, x='simulation_total')
+	df = df['simulation_total'].value_counts().reset_index()
+	df.columns = ['Runs per Game', 'Count']
+	fig = px.bar(df, x='Runs per Game', y='Count')
 	fig.update_layout(
-		title=f'Simulation Results ({len(df)} simulations)',
+		title=f'Simulation Results ({n} simulations)',
 		xaxis_title='Total Runs Scored per Simulation',
-		yaxis_title='Percent of Games',
+		yaxis_title='Number of Games',
 		bargap=0.2
 		)
 	fig.update_layout(dict(

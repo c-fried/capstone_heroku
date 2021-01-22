@@ -309,7 +309,7 @@ OPTIMIZE_DIV = html.Div(id='optimize', children=[
 				dbc.Label('Show Live Updates of Optimizer'),
 				dbc.Checkbox(
 					id='toggle-interval',
-					checked=True
+					checked=False
 					)]),
 			dbc.Button(
 				'Optimize Given Lineup',

@@ -616,15 +616,13 @@ def show_results_simulate(n_clicks, n, data):
 		# raise PreventUpdate
 
 	df, verbose_results = simulator.simulate(n=n, **json.loads(data))
-	fig = px.histogram(df, x='simulation_total')
-	# fig = create_distplot(
-	# 	[df['simulation_total']], 
-	# 	['Runs Scored'],
-	# 	bin_size=0.5)
+	df['simulation_total'] = df['simulation_total'].astype('category')
+	fig = px.bar(df, x='simulation_total')
 	fig.update_layout(
 		title=f'Simulation Results ({len(df)} simulations)',
 		xaxis_title='Total Runs Scored per Simulation',
 		yaxis_title='Percent of Games',
+		bargap=0.2
 		)
 	fig.update_layout(dict(
 		plot_bgcolor='rgba(0, 0, 0, 0)',

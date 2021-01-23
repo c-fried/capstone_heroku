@@ -848,11 +848,12 @@ def optimize_lineup(n_clicks, simulations_per_order, data):
 	"""
 	Iterate through each lineup-spot to find out who belongs where in the order.
 	"""
+	if not n_clicks:
+		raise PreventUpdate
 	def hitters_message(n_clicks, simulations_per_order, data):
+		print('starting hitters_message')
 		global storage
 
-		if not n_clicks:
-			raise PreventUpdate
 
 		storage.locked_in = []
 		storage.currently_trying = []
@@ -868,6 +869,7 @@ def optimize_lineup(n_clicks, simulations_per_order, data):
 				hitters, 
 				start_idx, 
 				masked_elements=8-len(storage.locked_in)):
+
 				# Update `trying`
 				storage.currently_trying = [
 					f'{n}. {simulator.player_finder.get_player_name(hitter, verbose=False)}'
@@ -891,6 +893,7 @@ def optimize_lineup(n_clicks, simulations_per_order, data):
 					 runs.sum(), # sum of all the sims
 					 len(_scoring_sims)) # number of sims with runs scored
 				)
+				print(_hitters)
 			# Find player with highest expected_runs_scored.
 			top_hitter = sorted(
 				_hitters, 
@@ -910,9 +913,12 @@ def optimize_lineup(n_clicks, simulations_per_order, data):
 		success_msg = '\n#### Lineup Sorted Sucessfully\n'
 
 		# set lineup inputs to optimized lineup
+		print('finished process')
 		return h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg
 
-	h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg = q.enqueue(hitters_message)
+	h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg = q.enqueue(
+		simulator.optimize_lineup, 
+		kargs=data)
 	return h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg
 
 

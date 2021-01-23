@@ -281,7 +281,7 @@ SIMULATE_MULTI_DIV = html.Div(id='simulate-multi', children=[
 			id='loading-output-multi',
 			children=[dcc.Graph(id='multi-output-graph')],
 			type='default'),
-		dcc.Markdown(id='multi-output-md')
+		html.Div(id='multi-output-md')
 		])
 ])
 
@@ -419,6 +419,16 @@ HEADING_DIV = html.Div(id='heading', children=[
 			width=8
 			),
 		justify='center'),
+	dbc.Row(
+		dbc.Col(
+			dcc.Markdown("""
+				***Note:*** *By default, the 1998 Yankees starters were selected 
+				for the lineup. However, have fun mixing and matching players 
+				from different teams, different leagues, or different eras!*
+				"""),
+			width='auto'
+			),
+		justify='center'),
 	html.Hr(),
 	INPUT_DIV,
 	dbc.Row(
@@ -426,6 +436,7 @@ HEADING_DIV = html.Div(id='heading', children=[
 			dbc.Tab(OPTIMIZE_DIV, label='Optimize Lineup'), 
 			width=8), 
 		justify='center'),
+	html.Br(),
 	dbc.Row(
 		dbc.Col(
 			dbc.Tabs([
@@ -443,9 +454,11 @@ HEADING_DIV = html.Div(id='heading', children=[
 CREDITS_DIV = html.Div(id='credits', children=[
 	dbc.Row(
 		dbc.Col(
-			html.P("""
-				Claude Fried, 2021.
-				Credits etc.
+			dcc.Markdown("""Claude Fried, 2021.
+				\nCapstone project for Flatiron School's Data Science Bootcamp.
+				> The information used here was obtained free of
+				> charge from and is copyrighted by Retrosheet.  Interested
+				> parties may contact Retrosheet at "www.retrosheet.org".
 				"""),
 			width='auto'),
 		justify='end'
@@ -738,7 +751,10 @@ def show_results_simulate(n_clicks, n, data):
 		plot_bgcolor='rgba(0, 0, 0, 0)',
 		paper_bgcolor='rgba(0, 0, 0, 0)')
 		)
-	return fig, verbose_results
+	table = dbc.Table.from_dataframe(
+		pd.DataFrame(verbose_results), 
+		bordered=True)
+	return fig, table
 
 
 @app.callback(Output('optimze-interval-component', 'disabled'),

@@ -532,7 +532,11 @@ class Simulator:
 			)
 		runs_per_inning = RESULTS.mean().mean()
 		RESULTS['simulation_total'] = RESULTS.sum(axis=1)
-		verbose_results = f'- Average Runs Scored (/inning): {round(runs_per_inning, 3)}\n- Average Runs Scored (/9-inning-game): {round((runs_per_inning)*9, 3)}'
+		verbose_results = {
+			'Runs per Inning': [round(runs_per_inning, 3)],
+			'Runs per 9-Inning Game': [round((runs_per_inning)*9, 3)]
+		}
+
 		if verbose:
 			print(headerize('Simulation Complete'))
 			print(f'{n} {num_innings}-inning simulations run.')

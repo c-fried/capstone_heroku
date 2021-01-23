@@ -13,6 +13,9 @@ import pickle
 import joblib
 import sklearn
 
+from rq import Queue
+from worker import conn
+
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -37,8 +40,11 @@ storage = DataStorage()
 with open(r"player_options.json", "r") as read_file:
     player_options = json.load(read_file)
 
+q = Queue(connection=conn)
+
 
 def player_dropdown(_id, player_id=''):
+	"""Returns a dcc.Dropdown of players."""
 	return dcc.Dropdown(
 		id=_id,
 		# options=player_options, 
@@ -842,68 +848,71 @@ def optimize_lineup(n_clicks, simulations_per_order, data):
 	"""
 	Iterate through each lineup-spot to find out who belongs where in the order.
 	"""
+	def hitters_message(n_clicks, simulations_per_order, data)
+		global storage
 
-	global storage
+		if not n_clicks:
+			raise PreventUpdate
 
-	if not n_clicks:
-		raise PreventUpdate
+		storage.locked_in = []
+		storage.currently_trying = []
 
-	storage.locked_in = []
-	storage.currently_trying = []
+		# Load data
+		data = json.loads(data)
+		hitters = data['lineup']
+		data.pop('lineup', None)
+		# Find optimized hitter for each spot in order.
+		for start_idx in range(9): # Top players for first 8 spots.
+			_hitters = [] # tuple of stats of the simulations
+			for batting_order in shuffle_lst(
+				hitters, 
+				start_idx, 
+				masked_elements=8-len(storage.locked_in)):
+				# Update `trying`
+				storage.currently_trying = [
+					f'{n}. {simulator.player_finder.get_player_name(hitter, verbose=False)}'
+					for n, hitter in enumerate(batting_order, 1)
+				]
 
-	# Load data
-	data = json.loads(data)
-	hitters = data['lineup']
-	data.pop('lineup', None)
-	# Find optimized hitter for each spot in order.
-	for start_idx in range(9): # Top players for first 8 spots.
-		_hitters = [] # tuple of stats of the simulations
-		for batting_order in shuffle_lst(
-			hitters, 
-			start_idx, 
-			masked_elements=8-len(storage.locked_in)):
-			# Update `trying`
-			storage.currently_trying = [
-				f'{n}. {simulator.player_finder.get_player_name(hitter, verbose=False)}'
-				for n, hitter in enumerate(batting_order, 1)
-			]
+				# Run simulations
+				df, _ = simulator.simulate(
+					lineup=batting_order,
+					n=simulations_per_order,
+					**data)
 
-			# Run simulations
-			df, _ = simulator.simulate(
-				lineup=batting_order,
-				n=simulations_per_order,
-				**data)
+				# Append (hitter_id, total_runs, count_of_scores).
+				runs = df['simulation_total'].copy()
+				# Remove bottom and top 25%
+				runs = runs[(runs > runs.quantile(0.25)) & 
+							(runs < runs.quantile(0.75))]
+				_scoring_sims = runs[runs > 0]
+				_hitters.append(
+					(batting_order[start_idx], 
+					 runs.sum(), # sum of all the sims
+					 len(_scoring_sims)) # number of sims with runs scored
+				)
+			# Find player with highest expected_runs_scored.
+			top_hitter = sorted(
+				_hitters, 
+				key=lambda x: (x[1], x[2]), 
+				reverse=True
+				)[0][0]
+			storage.locked_in.append(top_hitter)
+			
+			# Remove locked in players from hitters list.
+			hitters = [h for h in hitters if h not in storage.locked_in]
 
-			# Append (hitter_id, total_runs, count_of_scores).
-			runs = df['simulation_total'].copy()
-			# Remove bottom and top 25%
-			runs = runs[(runs > runs.quantile(0.25)) & 
-						(runs < runs.quantile(0.75))]
-			_scoring_sims = runs[runs > 0]
-			_hitters.append(
-				(batting_order[start_idx], 
-				 runs.sum(), # sum of all the sims
-				 len(_scoring_sims)) # number of sims with runs scored
-			)
-		# Find player with highest expected_runs_scored.
-		top_hitter = sorted(
-			_hitters, 
-			key=lambda x: (x[1], x[2]), 
-			reverse=True
-			)[0][0]
-		storage.locked_in.append(top_hitter)
-		
-		# Remove locked in players from hitters list.
-		hitters = [h for h in hitters if h not in storage.locked_in]
+			# Reset hitters list starting with locked in players 
+			# so locked_in players won't be iterated over.
+			hitters = storage.locked_in + hitters
 
-		# Reset hitters list starting with locked in players 
-		# so locked_in players won't be iterated over.
-		hitters = storage.locked_in + hitters
+		h1, h2, h3, h4, h5, h6, h7, h8, h9 = hitters
+		success_msg = '\n#### Lineup Sorted Sucessfully\n'
 
-	h1, h2, h3, h4, h5, h6, h7, h8, h9 = hitters
-	success_msg = '\n#### Lineup Sorted Sucessfully\n'
+		# set lineup inputs to optimized lineup
+		return h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg
 
-	# set lineup inputs to optimized lineup
+	h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg = q.enqueue(hitters_message)
 	return h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg
 
 

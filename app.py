@@ -491,10 +491,13 @@ app.layout = html.Div(
 # Callbacks ####################################################################
 ################################################################################
 ################################################################################
+
 @app.callback(Output('hitter-1-input', 'options'),
 			 [Input('hitter-1-input', 'search_value'),
 			  Input('hitter-1-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -506,6 +509,8 @@ def update_options1(search_value, value):
 			 [Input('hitter-2-input', 'search_value'),
 			  Input('hitter-2-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -517,6 +522,8 @@ def update_options1(search_value, value):
 			 [Input('hitter-3-input', 'search_value'),
 			  Input('hitter-3-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -528,6 +535,8 @@ def update_options1(search_value, value):
 			 [Input('hitter-4-input', 'search_value'),
 			  Input('hitter-4-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -539,6 +548,8 @@ def update_options1(search_value, value):
 			 [Input('hitter-5-input', 'search_value'),
 			  Input('hitter-5-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -550,6 +561,8 @@ def update_options1(search_value, value):
 			 [Input('hitter-6-input', 'search_value'),
 			  Input('hitter-6-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -561,6 +574,8 @@ def update_options1(search_value, value):
 			 [Input('hitter-7-input', 'search_value'),
 			  Input('hitter-7-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -572,6 +587,8 @@ def update_options1(search_value, value):
 			 [Input('hitter-8-input', 'search_value'),
 			  Input('hitter-8-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -583,6 +600,8 @@ def update_options1(search_value, value):
 			 [Input('hitter-9-input', 'search_value'),
 			  Input('hitter-9-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
@@ -594,6 +613,8 @@ def update_options1(search_value, value):
 			 [Input('pitcher-input', 'search_value'),
 			  Input('pitcher-input', 'value')])
 def update_options1(search_value, value):
+	"""Updates the possible dropdown options based on the given unput."""
+	
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:

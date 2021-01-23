@@ -263,10 +263,10 @@ SIMULATE_MULTI_DIV = html.Div(id='simulate-multi', children=[
 	dbc.Row(
 		dbc.Col([
 			dbc.FormGroup([
-				dbc.Label('Number of Simulations (max: 200)'),
+				dbc.Label('Number of Simulations (max: 30)'),
 				dbc.Input(
 					id='num-simulations', 
-					type='number', value=30, min=2, max=200, step=1)
+					type='number', value=30, min=2, max=30, step=1)
 				]),
 			dbc.Button(
 				'Run Multi-Branch Simulation', 
@@ -497,7 +497,7 @@ app.layout = html.Div(
 			  Input('hitter-1-input', 'value')])
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
-	
+
 	if value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:

@@ -498,7 +498,7 @@ app.layout = html.Div(
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -511,7 +511,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -524,7 +524,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -537,7 +537,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -550,7 +550,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -563,7 +563,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -576,7 +576,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -589,7 +589,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -602,7 +602,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate
@@ -615,7 +615,7 @@ def update_options1(search_value, value):
 def update_options1(search_value, value):
 	"""Updates the possible dropdown options based on the given unput."""
 	
-	if value:
+	if value and not search_value:
 		return [o for o in player_options if value == o['value']]
 	if not search_value:
 		raise PreventUpdate

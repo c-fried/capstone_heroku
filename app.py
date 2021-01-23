@@ -848,7 +848,7 @@ def optimize_lineup(n_clicks, simulations_per_order, data):
 	"""
 	Iterate through each lineup-spot to find out who belongs where in the order.
 	"""
-	def hitters_message(n_clicks, simulations_per_order, data)
+	def hitters_message(n_clicks, simulations_per_order, data):
 		global storage
 
 		if not n_clicks:

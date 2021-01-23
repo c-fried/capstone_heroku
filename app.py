@@ -41,8 +41,8 @@ with open(r"player_options.json", "r") as read_file:
 def player_dropdown(_id, player_id=''):
 	return dcc.Dropdown(
 		id=_id,
-		options=player_options, 
-		placeholder='Last, First: Debut Year.',
+		# options=player_options, 
+		placeholder='Last, First: Debut-Year.',
 		value=player_id
  	)
 
@@ -478,6 +478,116 @@ app.layout = html.Div(
 # Callbacks ####################################################################
 ################################################################################
 ################################################################################
+@app.callback(Output('hitter-1-input', 'options'),
+			 [Input('hitter-1-input', 'search_value'),
+			  Input('hitter-1-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('hitter-2-input', 'options'),
+			 [Input('hitter-2-input', 'search_value'),
+			  Input('hitter-2-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('hitter-3-input', 'options'),
+			 [Input('hitter-3-input', 'search_value'),
+			  Input('hitter-3-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('hitter-4-input', 'options'),
+			 [Input('hitter-4-input', 'search_value'),
+			  Input('hitter-4-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('hitter-5-input', 'options'),
+			 [Input('hitter-5-input', 'search_value'),
+			  Input('hitter-5-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('hitter-6-input', 'options'),
+			 [Input('hitter-6-input', 'search_value'),
+			  Input('hitter-6-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('hitter-7-input', 'options'),
+			 [Input('hitter-7-input', 'search_value'),
+			  Input('hitter-7-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('hitter-8-input', 'options'),
+			 [Input('hitter-8-input', 'search_value'),
+			  Input('hitter-8-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('hitter-9-input', 'options'),
+			 [Input('hitter-9-input', 'search_value'),
+			  Input('hitter-9-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+	
+@app.callback(Output('pitcher-input', 'options'),
+			 [Input('pitcher-input', 'search_value'),
+			  Input('pitcher-input', 'value')])
+def update_options1(search_value, value):
+	if value:
+		return [o for o in player_options if value == o['value']]
+	if not search_value:
+		raise PreventUpdate
+	return [o for o in player_options if search_value in o['label']]
+
+
 @app.callback(
 	Output('data-output', 'children'), 
 	[

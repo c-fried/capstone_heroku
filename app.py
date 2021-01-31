@@ -46,7 +46,7 @@ def player_dropdown(_id, player_id=''):
 		placeholder='Last, First: Debut-Year.',
 		value=player_id
  	)
- 	
+
 
 yankees98 = [
 	'posaj001',
@@ -264,10 +264,10 @@ SIMULATE_MULTI_DIV = html.Div(id='simulate-multi', children=[
 	dbc.Row(
 		dbc.Col([
 			dbc.FormGroup([
-				dbc.Label('Number of Simulations (max: 30)'),
+				dbc.Label('Number of Simulations (max: 25)'),
 				dbc.Input(
 					id='num-simulations', 
-					type='number', value=30, min=2, max=30, step=1)
+					type='number', value=25, min=2, max=25, step=1)
 				]),
 			dbc.Button(
 				'Run Multi-Branch Simulation', 

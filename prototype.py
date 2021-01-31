@@ -13,6 +13,9 @@ import pickle
 import joblib
 import sklearn
 
+from rq import Queue
+from worker import conn
+
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -763,7 +766,9 @@ def set_input_form_to_optimized(final_output):
 
 	if not final_output:
 		raise PreventUpdate
+
 	return json.loads(final_output)
+
 
 
 ################################################################################
@@ -984,6 +989,7 @@ def show_results_single(n_clicks, data):
 			paper_bgcolor='rgba(0, 0, 0, 0)')
 			)
 		return fig, ''
+		# raise PreventUpdate
 
 	data = json.loads(data)
 	inning_range = range(
@@ -1036,6 +1042,7 @@ def show_results_simulate(n_clicks, n, data):
 			paper_bgcolor='rgba(0, 0, 0, 0)')
 			)
 		return fig, ''
+		# raise PreventUpdate
 
 	df, verbose_results = simulator.simulate(n=n, **json.loads(data))
 	df = df['simulation_total'].value_counts().reset_index()
@@ -1055,6 +1062,123 @@ def show_results_simulate(n_clicks, n, data):
 		pd.DataFrame(verbose_results), 
 		bordered=True)
 	return fig, table
+
+
+# @app.callback([Output('lineup-locks-output', 'children'),
+# 			   Output('trying', 'children')],
+# 			  [Input('optimze-interval-component', 'n_intervals'),
+# 			   Input('optimze-interval-component', 'disabled')])
+# def show_optimize_progress(n_intervals, disabled):
+# 	"""
+# 	The `storage` class is checked (the data from which is updated during the
+# 	optimizer).
+# 	"""
+
+# 	global storage
+
+# 	if disabled:
+# 		return '', ''
+# 	if not storage.locked_in and not storage.currently_trying:
+# 		return '', ''
+
+# 	locked_in_names = [
+# 		f'{n}. {simulator.player_finder.get_player_name(hitter, verbose=False)}' 
+# 		for n, hitter in enumerate(storage.locked_in, 1)
+# 	]
+# 	locks_message = '### Lineup Locks:\n' + \
+# 					'\n'.join(locked_in_names)
+# 	if len(locked_in_names) == 9:
+# 		trying_message = ''
+# 	else:
+# 		trying_message = '### Currently Trying:\n' + \
+# 						 '\n'.join(storage.currently_trying)
+# 	return locks_message, trying_message
+
+
+# @app.callback(
+# 	[Output('hitter-1-input', 'value'),
+# 	 Output('hitter-2-input', 'value'),
+# 	 Output('hitter-3-input', 'value'),
+# 	 Output('hitter-4-input', 'value'),
+# 	 Output('hitter-5-input', 'value'),
+# 	 Output('hitter-6-input', 'value'),
+# 	 Output('hitter-7-input', 'value'),
+# 	 Output('hitter-8-input', 'value'),
+# 	 Output('hitter-9-input', 'value'),
+# 	 Output('loading-optimize', 'children')],
+# 	[Input('submit-optimize', 'n_clicks')],
+# 	[State('sims-per-order', 'value'), 
+# 	 State('data-output', 'children')]
+# 	)
+# def optimize_lineup(n_clicks, simulations_per_order, data):
+# 	"""
+# 	Iterate through each lineup-spot to find out who belongs where in the order.
+# 	"""
+	
+# 	if not n_clicks:
+# 		raise PreventUpdate
+# 	global storage
+
+# 	storage.locked_in = []
+# 	storage.currently_trying = []
+
+# 	# Load data
+# 	data = json.loads(data)
+# 	hitters = data['lineup']
+# 	data.pop('lineup', None)
+
+# 	# Find optimized hitter for each spot in order.
+# 	for start_idx in range(9): # Top players for first 8 spots.
+# 		_hitters = [] # tuple of stats of the simulations
+# 		for batting_order in shuffle_lst(
+# 			hitters, 
+# 			start_idx, 
+# 			masked_elements=8-len(storage.locked_in)):
+
+# 			# Update `trying`
+# 			storage.currently_trying = [
+# 				f'{n}. {simulator.player_finder.get_player_name(hitter, verbose=False)}'
+# 				for n, hitter in enumerate(batting_order, 1)
+# 			]
+
+# 			# Run simulations
+# 			df, _ = simulator.simulate(
+# 				lineup=batting_order,
+# 				n=simulations_per_order,
+# 				**data)
+
+# 			# Append (hitter_id, total_runs, count_of_scores).
+# 			runs = df['simulation_total'].copy()
+# 			# Remove bottom and top 25%
+# 			runs = runs[(runs > runs.quantile(0.25)) & 
+# 						(runs < runs.quantile(0.75))]
+# 			_scoring_sims = runs[runs > 0]
+# 			_hitters.append(
+# 				(batting_order[start_idx], 
+# 				 runs.sum(), # sum of all the sims
+# 				 len(_scoring_sims)) # number of sims with runs scored
+# 			)
+
+# 		# Find player with highest expected_runs_scored.
+# 		top_hitter = sorted(
+# 			_hitters, 
+# 			key=lambda x: (x[1], x[2]), 
+# 			reverse=True
+# 			)[0][0]
+# 		storage.locked_in.append(top_hitter)
+		
+# 		# Remove locked in players from hitters list.
+# 		hitters = [h for h in hitters if h not in storage.locked_in]
+
+# 		# Reset hitters list starting with locked in players 
+# 		# so locked_in players won't be iterated over.
+# 		hitters = storage.locked_in + hitters
+
+# 	h1, h2, h3, h4, h5, h6, h7, h8, h9 = hitters
+
+# 	# set lineup inputs to optimized lineup
+# 	success_msg = '\n#### Lineup Sorted Sucessfully\n'
+# 	return h1, h2, h3, h4, h5, h6, h7, h8, h9, success_msg
 
 
 if __name__ == '__main__':

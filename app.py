@@ -37,8 +37,6 @@ storage = DataStorage()
 with open(r"player_options.json", "r") as read_file:
     player_options = json.load(read_file)
 
-q = Queue(connection=conn)
-
 
 def player_dropdown(_id, player_id=''):
 	"""Returns a dcc.Dropdown of players."""
@@ -48,7 +46,7 @@ def player_dropdown(_id, player_id=''):
 		placeholder='Last, First: Debut-Year.',
 		value=player_id
  	)
-
+ 	
 
 yankees98 = [
 	'posaj001',

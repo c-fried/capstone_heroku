@@ -311,7 +311,7 @@ def create_optimize_div():
 					dbc.Label('Simulations per Order Shuffle'),
 					dbc.Input(
 						id='sims-per-order',
-						type='number', value=25, min=2, max=200, step=1)]),
+						type='number', value=25, min=2, max=25, step=1)]),
 				dbc.Button(
 					'Optimize Given Lineup',
 					id='submit-optimize',

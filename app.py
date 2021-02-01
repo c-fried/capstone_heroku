@@ -48,16 +48,16 @@ def player_dropdown(_id, player_id=''):
  	)
 
 
-yankees98 = [
-	'posaj001',
+asg97 = [
+	'andeb001',
+	'rodra001',
+	'grifk002',
 	'martt002',
-	'knobc001',
-	'bross001',
-	'jeted001',
-	'curtc001',
-	'willb002',
+	'marte001',
 	'oneip001',
-	'strad001'
+	'ripkc001',
+	'rodri001',
+	'alomr001'
 ]
 maddux = 'maddg002'
 
@@ -66,7 +66,7 @@ lineup_selector = dbc.Col([
 	dbc.Row(
 		dbc.Col(player_dropdown(f'hitter-{n}-input', player_id)), 
 		justify='center')
-	for n, player_id in zip(range(1, 10), yankees98)],
+	for n, player_id in zip(range(1, 10), asg97)],
 	width=5
 )
 
@@ -432,9 +432,10 @@ HEADING_DIV = html.Div(id='heading', children=[
 	dbc.Row(
 		dbc.Col(
 			dcc.Markdown("""
-				***Note:*** *By default, the 1998 Yankees starters were selected 
-				for the lineup. However, have fun mixing and matching players 
-				from different teams, different leagues, or different eras!*
+				***Note:*** *By default, the 1997 All Star Game starters were 
+				selected for the lineup (AL batting, NL pitching). However, have 
+				fun mixing and matching players from different teams, different 
+				leagues, or different eras!*
 				"""),
 			width='auto'
 			),
@@ -599,7 +600,7 @@ def simulate(current_try,
 	# Load data
 	data = json.loads(data)
 	data.pop('lineup', None)
-	data['num_innings'] = (len(locked_in)//3) + 1 # [1,2,3] == 0, [4,5,6] == 1, [7,8] == 2
+	data['num_innings'] = (len(locked_in)//3) + 1 # [1,2,3] == 1, [4,5,6] == 2, [7,8] == 3
 
 	df, _ = simulator.simulate(
 		lineup=current_try,

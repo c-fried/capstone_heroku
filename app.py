@@ -594,10 +594,12 @@ def simulate(current_try,
 	if not current_try:
 		raise PreventUpdate
 	current_try = json.loads(current_try)
+	locked_in = [] if not locked_in else json.loads(locked_in)
 
 	# Load data
 	data = json.loads(data)
 	data.pop('lineup', None)
+	data['num_innings'] = (len(locked_in)//3) + 1 # [1,2,3] == 0, [4,5,6] == 1, [7,8] == 2
 
 	df, _ = simulator.simulate(
 		lineup=current_try,
@@ -605,7 +607,6 @@ def simulate(current_try,
 		**data)
 
 	lineup_results = [] if not lineup_results else json.loads(lineup_results)
-	locked_in = [] if not locked_in else json.loads(locked_in)
 	lineups = [] if not shuffled_lineups else json.loads(shuffled_lineups)
 
 	active_hitters = [x for x in current_try if x] # actual hitters, not control group

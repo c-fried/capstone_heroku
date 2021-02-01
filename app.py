@@ -362,10 +362,9 @@ HEADING_DIV = html.Div(id='heading', children=[
 	dbc.Row(
 		dbc.Col(
 			html.P("""
-				Beginning in the mid-1800s (and still continuing strong today), 
-				baseball is clearly one of the staples of American culture. With 
-				player and game data going back well over 100 years, it's a ripe 
-				domain to study.
+				Since its inception in the mid-1800s, baseball has continued to 
+				be a hallmark of American culture. With player and game data 
+				going back well over 100 years, it's a ripe domain to study.
 				"""),
 			width=8
 			),
@@ -374,17 +373,17 @@ HEADING_DIV = html.Div(id='heading', children=[
 		dbc.Col(
 			html.P("""
 				This app uses an SGD Logistic Regression model (built in 
-				Sklearn) and "event" data that I've collected and engineered 
-				from Retrosheet.org.
+				scikit-learn) and "event" data that I've collected and 
+				engineered from Retrosheet.org.
 				My goal was to make a model that could predict the outcome of an
 				"event" (at-bat) during a game. There are 10 outcomes of an 
 				event, such as ['single', 'strikeout', 'home-run', 'walk', etc].
-				The games are reconstructed (without baserunning considerations)
-				by taking the results of each play and inputting them into the 
-				game-state. Amazingly, without any knowledge of what
-				"runs-scored" are, the model's simulations are very good 
-				representations (as validated by season-simulations of past
-				years).
+				The games are reconstructed by taking the results of each play 
+				and inputting them into the game-state. Amazingly, without any 
+				knowledge of what "runs-scored" are, and without any baserunning 
+				considerations, the model's simulations are very good 
+				representations of reality as validated by season-simulations of 
+				past years).
 				"""),
 			width=8
 			),
@@ -393,14 +392,15 @@ HEADING_DIV = html.Div(id='heading', children=[
 		dbc.Col(
 			html.P(""" 
 				There are two aspects to factor in: player-data and game-data.
-				Every player (pitcher and hitter) since 1950 has been accounted
-				for, as well as their at-bat-to-at-bat stats. The Hitter vs
-				Pitcher dynamic is a huge factor in how the model predicts the 
-				outcomes. There is also game data (temperature / attendance) 
-				which the model uses to influence its predictions. Finally, 
-				there is dynamic data of what has happened just before in an
-				inning. For example, if the previous 2 hitters just walked, how
-				does that impact the liklihood of the next outcome?
+				Every player, both pitchers and hitters, since 1950 has been 
+				accounted for as well as their at-bat to at-bat stats. The 
+				hitter vs pitcher dynamic is a significant factor in how the 
+				model predicts the outcomes. There is also game data, such as 
+				temperature and stadium attendance, which the model uses to 
+				influence its predictions. Finally, there is dynamic data of 
+				prior outcomes within in an inning. For example, if the 
+				previous 2 hitters just walked, how does that impact what is
+				likely to happen next?
 				"""),
 			width=8
 			),
@@ -412,19 +412,19 @@ HEADING_DIV = html.Div(id='heading', children=[
 				\n\n- **Lineup Optimizer:**
 				\n > A tool that will try to find the best batting-order from a 
 				list of hitters. The best batting order will be the one that has
-				the highest "expected runs scored" over each iteration through 
+				the highest **expected runs scored** over each iteration through 
 				the search. 
 				\n > *The searching algorithm is in no way exhaustive, 
-				but returns some very interesting results. The greater the
-				number of **"Simulations per Order Shuffle"**, the more likely
-				you are to getting consistent results.*
+				but returns some very interesting results. By increasing 
+				**Simulations per Order Shuffle**, results will be more 
+				consistent.*
 				\n\n- **Single Game Simulation:**
-				\n > Run a detailed simulation where you can see every play in a 
-				game / shortened-simulation.
+				\n > Run a detailed simulation where every play in a 
+				simulated game is shown.
 				\n\n- **Multi-Game Simulation:**
-				\n > Run multiple simulations where the same lineup is facing the
-				same lineup. This is useful to see how the lineup is expected to 
-				perform over a long stretch of time.
+				\n > Run multiple simulations where a lineup faces a pitcher. 
+				This is useful to see how a lineup is expected to perform over a
+				long stretch of time.
 				"""),
 			width=8
 			),

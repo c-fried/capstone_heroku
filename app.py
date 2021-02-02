@@ -470,6 +470,7 @@ CREDITS_DIV = html.Div(id='credits', children=[
 		dbc.Col(
 			dcc.Markdown("""Claude Fried, 2021.
 				\nCapstone project for Flatiron School's Data Science Bootcamp.
+				\n<a href="https://github.com/cwf231/dsc_capstone">github</a>
 				> The information used here was obtained free of
 				> charge from and is copyrighted by Retrosheet.  Interested
 				> parties may contact Retrosheet at "www.retrosheet.org".

@@ -514,7 +514,7 @@ app.layout = html.Div(
 	State('data-output', 'children')
 	)
 def populate_hitters(n_clicks, data):
-	"""Hidden current-hitters"""
+	"""Hidden - current-hitters from user input."""
 
 	if not n_clicks:
 		raise PreventUpdate
@@ -530,6 +530,10 @@ def populate_hitters(n_clicks, data):
 	State('hidden-locked-in', 'children')
 	)
 def shuffle_lineups(n_intervals, all_hitters, locked_in):
+	"""
+	Hidden - return a list of shuffled lineups which will be iterated over.
+	"""
+
 	if not all_hitters:
 		raise PreventUpdate
 	all_hitters = json.loads(all_hitters)
@@ -559,6 +563,8 @@ def get_current_try(n_intervals,
 					lineup_results, 
 					current_try, 
 					locked_in):
+	"""Hidden - select the lineup from `shuffled-lineups` to simulate."""
+
 	if shuffled_lineups is None:
 		raise PreventUpdate
 	shuffled_lineups = json.loads(shuffled_lineups)
@@ -593,6 +599,8 @@ def simulate(current_try,
 			 shuffled_lineups,
 			 simulations_per_order,
 			 data):
+	"""Hidden - run simulations and return player, ev to lineup-results."""
+
 	if not current_try:
 		raise PreventUpdate
 	current_try = json.loads(current_try)
@@ -642,6 +650,8 @@ def simulate(current_try,
 	State('hidden-all-hitters', 'children')
 	)
 def set_locked_in(lineup_results, locked_in, all_hitters):
+	"""Choose from `lineup-results` who should take a place as locked-in."""
+
 	if not lineup_results:
 		raise PreventUpdate
 	lineup_results = [] if not lineup_results else json.loads(lineup_results)
@@ -667,6 +677,8 @@ def set_locked_in(lineup_results, locked_in, all_hitters):
 	State('hidden-all-hitters', 'children')
 	)
 def set_final_result(shuffled_lineups, all_hitters):
+	"""Set final results from simulations to hidden div."""
+
 	lineups = [] if not shuffled_lineups else json.loads(shuffled_lineups)
 	if not lineups:
 		raise PreventUpdate
@@ -684,6 +696,8 @@ def set_final_result(shuffled_lineups, all_hitters):
 	Input('hidden-all-hitters', 'children')
 	)
 def reset_interval(final_output, all_hitters):
+	"""Turn off interval component when functions are complete."""
+
 	if all_hitters and not final_output:
 		return False
 	else:
@@ -695,6 +709,8 @@ def reset_interval(final_output, all_hitters):
 	Input('clear', 'n_clicks')
 	)
 def reset_page(n_clicks):
+	"""Clear Div"""
+
 	if not n_clicks:
 		raise PreventUpdate
 	return create_optimize_div()
